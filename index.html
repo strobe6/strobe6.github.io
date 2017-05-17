@@ -1,18 +1,8 @@
 
 <html>
     <head>
-
         <meta charset="utf-8" />
-
-        <style type="text/css">
-            img{
-              position: absolute;
-              z-index: 3;
-              border : none;
-              align: "middle";
-            }
-        </style>
-
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         
@@ -22,18 +12,36 @@
         <script type="text/javascript" src="figure.js"></script>
         <script type="text/javascript" src="images.js"></script>
         
-        <div id="5bc9d9f6-f3ce-4f99-a8f5-88825e7b75ce" style="width: 100%; height: 100%;" class="plotly-graph-div"></div>
-        <img id="hoverinfo" src=""></div>
+        <div id="plot-div" style="width: 100%; height: 100%;" class="plotly-graph-div"></div>
+        <img id="hover-image" class = "hover-img" src=""></div>
+        <div id="myModal" class="modal">
+
+          <!-- The Close Button -->
+          <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+          <!-- Modal Content (The Image) -->
+          <img class="modal-content" id="img01">
+
+          <!-- Modal Caption (Image Text) -->
+          <div id="caption"></div>
+        </div>
         <script type="text/javascript">
             (function(){
                 window.PLOTLYENV={'BASE_URL': 'https://plot.ly'};
 
-                var gd = document.getElementById('5bc9d9f6-f3ce-4f99-a8f5-88825e7b75ce')
-                var hoverInfo = document.getElementById('hoverinfo');
+                var myPlot = document.getElementById('plot-div')
+                var hoverInfo = document.getElementById('hover-image');
                 var blankImg = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+                var modal = document.getElementById('myModal');
+                var modalImg = document.getElementById("img01");
+                var captionText = document.getElementById("caption");
+                var span = document.getElementsByClassName("close")[0];
+                span.onclick = function() { 
+                  modal.style.display = "none";
+                }
 
                 var resizeDebounce = null;
-                var bb = gd.getBoundingClientRect();
+                var bb = myPlot.getBoundingClientRect();
                 var screenHeight = bb.height;
                 var screenWidth = bb.width;
                 var maxHeight = screenHeight/1.8;
@@ -42,13 +50,11 @@
                 hoverInfo.style.maxWidth = maxWidth + "px";
 
                 function resizePlot() {
-                    
-                    Plotly.relayout(gd, {
+                    Plotly.relayout(myPlot, {
                         width: bb.width,
                         height: bb.height
                     });
                 }
-
                 
                 window.addEventListener('resize', function() {
                     if (resizeDebounce) {
@@ -57,16 +63,14 @@
                     resizeDebounce = window.setTimeout(resizePlot, 100);
                 });
                 
-
-                
-                Plotly.plot(gd,  {
+                Plotly.plot(myPlot,  {
                     data: figure.data,
                     layout: figure.layout,
                     frames: figure.frames,
                     config: {"mapboxAccessToken": "pk.eyJ1IjoiY2hyaWRkeXAiLCJhIjoiY2lxMnVvdm5iMDA4dnhsbTQ5aHJzcGs0MyJ9.X9o_rzNLNesDxdra4neC_A", "linkText": "Export to plot.ly", "showLink": true}
                 });
 
-                gd.on('plotly_hover', function(data){
+                myPlot.on('plotly_hover', function(data){
                     var x = data.points[0].x,
                         y = data.points[0].y;
 
@@ -111,6 +115,17 @@
                         }
                     }, 750);
                     
+                });
+
+                myPlot.on('plotly_click', function(data){
+                    hoverInfo.src = '';
+                    var x = data.points[0].x,
+                        y = data.points[0].y;
+                    var point = x + "," + y;
+                    if(images[point] !== undefined) imgSrc = images[point];
+                    modal.style.display = "block";
+                    modalImg.src = imgSrc;
+                    captionText.innerHTML = "Drop Collision at Drop Size: " + x + " and Strobe Delay: " + y ;
                 });
                 
            }());

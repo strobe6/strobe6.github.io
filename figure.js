@@ -9,9 +9,9 @@ var figure = {
             ], 
             "type": "linear", 
             "autorange": true, 
-            "title": "Delay (ms)"
+            "title": "Strobe Delay (ms)"
         }, 
-        "title": "Hover Graph of Drop Size vs Delay", 
+        "title": "Hover Graph of Drop Size vs Strobe Delay", 
         "autosize": true, 
         "breakpoints": [], 
         "xaxis": {
