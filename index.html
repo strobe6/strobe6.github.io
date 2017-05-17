@@ -84,13 +84,14 @@
                             ypixel = yaxis.l2p(d.y);
                         console.log("pixel: " + xpixel + ", " + ypixel);
                         console.log("Screen: " + screenWidth + ", " + screenHeight);
-                        if (ypixel > ( screenHeight/2)  ) {
-                            hoverInfo.style.bottom = 0;
-                            hoverInfo.style.top = (screenHeight - ypixel) + "px";
-                        } else {
-                            hoverInfo.style.bottom = 0;
-                            hoverInfo.style.top = ypixel + "px";
-                        }
+                        // if (ypixel > ( screenHeight/2)  ) {
+                        //     hoverInfo.style.bottom = 0;
+                        //     hoverInfo.style.top = (screenHeight - ypixel) + "px";
+                        // } else {
+                        //     hoverInfo.style.bottom = 0;
+                        //     hoverInfo.style.top = ypixel + "px";
+                        // }
+                        hoverInfo.style.top = screenHeight/4 + "px";
                         if (xpixel > ( screenWidth/2) + 10){
                             // hoverInfo.style.left = xpixel - (screenWidth - xpixel) - 100  + "px";
                             hoverInfo.style.left = xpixel - 700 + "px";
@@ -103,7 +104,13 @@
                     });      
                                           
                 }).on('plotly_unhover', function(data){
-                    hoverInfo.src = '';
+                    var original = hoverInfo.src;
+                    setTimeout(function() {
+                        if(hoverInfo.src == original){
+                            hoverInfo.src = '';
+                        }
+                    }, 750);
+                    
                 });
                 
            }());
