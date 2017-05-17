@@ -9,14 +9,14 @@ var figure = {
             ], 
             "type": "linear", 
             "autorange": true, 
-            "title": "Delay"
+            "title": "Delay (ms)"
         }, 
-        "title": "", 
+        "title": "Hover Graph of Drop Size vs Delay", 
         "autosize": true, 
         "breakpoints": [], 
         "xaxis": {
             "tickmode": "linear", 
-            "title": "Drop Size", 
+            "title": "Drop Size (ms)", 
             "tick0": -5, 
             "ticks": "", 
             "dtick": 10, 
