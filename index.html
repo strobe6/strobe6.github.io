@@ -1,0 +1,112 @@
+
+<html>
+    <head>
+
+        <meta charset="utf-8" />
+
+        <style type="text/css">
+            img{
+              position: absolute;
+              z-index: 3;
+              border : none;
+              align: "middle";
+            }
+        </style>
+
+    </head>
+    <body>
+        
+        <script type="text/javascript" src="plotlyjs-bundle.js"></script>
+    
+            
+        <script type="text/javascript" src="figure.js"></script>
+        <script type="text/javascript" src="images.js"></script>
+        
+        <div id="5bc9d9f6-f3ce-4f99-a8f5-88825e7b75ce" style="width: 100%; height: 100%;" class="plotly-graph-div"></div>
+        <img id="hoverinfo" src=""></div>
+        <script type="text/javascript">
+            (function(){
+                window.PLOTLYENV={'BASE_URL': 'https://plot.ly'};
+
+                var gd = document.getElementById('5bc9d9f6-f3ce-4f99-a8f5-88825e7b75ce')
+                var hoverInfo = document.getElementById('hoverinfo');
+                var blankImg = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+
+                var resizeDebounce = null;
+                var bb = gd.getBoundingClientRect();
+                var screenHeight = bb.height;
+                var screenWidth = bb.width;
+                var maxHeight = screenHeight/1.8;
+                var maxWidth = screenWidth/2.5;
+                hoverInfo.style.maxHeight = maxHeight + "px";
+                hoverInfo.style.maxWidth = maxWidth + "px";
+
+                function resizePlot() {
+                    
+                    Plotly.relayout(gd, {
+                        width: bb.width,
+                        height: bb.height
+                    });
+                }
+
+                
+                window.addEventListener('resize', function() {
+                    if (resizeDebounce) {
+                        window.clearTimeout(resizeDebounce);
+                    }
+                    resizeDebounce = window.setTimeout(resizePlot, 100);
+                });
+                
+
+                
+                Plotly.plot(gd,  {
+                    data: figure.data,
+                    layout: figure.layout,
+                    frames: figure.frames,
+                    config: {"mapboxAccessToken": "pk.eyJ1IjoiY2hyaWRkeXAiLCJhIjoiY2lxMnVvdm5iMDA4dnhsbTQ5aHJzcGs0MyJ9.X9o_rzNLNesDxdra4neC_A", "linkText": "Export to plot.ly", "showLink": true}
+                });
+
+                gd.on('plotly_hover', function(data){
+                    var x = data.points[0].x,
+                        y = data.points[0].y;
+
+                    var xaxis = data.points[0].xaxis,
+                        yaxis = data.points[0].yaxis;
+
+                    var imgSrc = blankImg;
+
+                    var point = x + "," + y;
+                    if(images[point] !== undefined) imgSrc = images[point];
+
+                    hoverInfo.src = imgSrc;
+                    var infotext = data.points.map(function(d){
+                        var xpixel = xaxis.l2p(d.x),
+                            ypixel = yaxis.l2p(d.y);
+                        console.log("pixel: " + xpixel + ", " + ypixel);
+                        console.log("Screen: " + screenWidth + ", " + screenHeight);
+                        if (ypixel > ( screenHeight/2)  ) {
+                            hoverInfo.style.bottom = 0;
+                            hoverInfo.style.top = (screenHeight - ypixel) + "px";
+                        } else {
+                            hoverInfo.style.bottom = 0;
+                            hoverInfo.style.top = ypixel + "px";
+                        }
+                        if (xpixel > ( screenWidth/2) + 10){
+                            // hoverInfo.style.left = xpixel - (screenWidth - xpixel) - 100  + "px";
+                            hoverInfo.style.left = xpixel - 700 + "px";
+                            hoverInfo.style.right = 0;
+                        } else {
+                            hoverInfo.style.right = 0;
+                            hoverInfo.style.left = xpixel + 100 + "px"; 
+                        }  
+                        
+                    });      
+                                          
+                }).on('plotly_unhover', function(data){
+                    hoverInfo.src = '';
+                });
+                
+           }());
+        </script>
+    </body>
+</html>
