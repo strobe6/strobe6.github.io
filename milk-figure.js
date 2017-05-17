@@ -11,7 +11,7 @@ var figure = {
             "autorange": true, 
             "title": "Strobe Delay (ms)"
         }, 
-        "title": "Hover Graph of Drop Size vs Strobe Delay (Water)", 
+        "title": "Hover Graph of Drop Size vs Strobe Delay (Milk)", 
         "autosize": true, 
         "breakpoints": [], 
         "xaxis": {
@@ -21,8 +21,8 @@ var figure = {
             "ticks": "", 
             "dtick": 10, 
             "range": [
-                22.502477700693756, 
-                67.49752229930624
+                12.502477700693756, 
+                57.49752229930624
             ], 
             "type": "linear", 
             "autorange": true
@@ -90,6 +90,16 @@ var figure = {
                 "22.5"
             ], 
             "x": [
+                "15", 
+                "15", 
+                "15", 
+                "15", 
+                "15", 
+                "15", 
+                "15", 
+                "15", 
+                "15", 
+                "15",
                 "25", 
                 "25", 
                 "25", 
@@ -129,17 +139,8 @@ var figure = {
                 "55", 
                 "55", 
                 "55", 
-                "55", 
-                "65", 
-                "65", 
-                "65", 
-                "65", 
-                "65", 
-                "65", 
-                "65", 
-                "65", 
-                "65", 
-                "65"
+                "55" 
+                
             ], 
             "type": "scatter", 
             "autobiny": true

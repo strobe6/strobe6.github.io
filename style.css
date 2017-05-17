@@ -1,3 +1,39 @@
+.center {
+    margin: auto;
+    width: 50%;
+    text-align: center
+}
+
+.milk:link, .milk:visited {
+    background-color: white;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: solid;
+}
+
+
+.milk:hover, .milk:active {
+    background-color: grey;
+}
+
+.water:link, .water:visited {
+    background-color: lightblue;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: solid black;
+}
+
+
+.water:hover, .water:active {
+    background-color: blue;
+}
+
 .hover-img{
   position: absolute;
   z-index: 3;
